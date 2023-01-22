@@ -13,7 +13,6 @@ const supergoose = require('supergoose')
 
 const url = process.env.MONGO_URL;
 const PORT = process.env.PORT || 3000;
-const vercelURL = "https://secrets-8y3imraqp-jcilacad.vercel.app";
 
 const connectionParams={
     useNewUrlParser: true
@@ -82,7 +81,7 @@ passport.deserializeUser(function (user, cb) {
 passport.use(new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "https://secrets-rho.vercel.app/auth/google/secrets"
+        callbackURL: "http://localhost:3000/auth/google/secrets"
     },
     function (accessToken, refreshToken, profile, cb) {
         User.findOrCreate({googleId: profile.id}, function (err, user) {
@@ -94,7 +93,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
         clientID: process.env.APP_ID,
         clientSecret: process.env.APP_SECRET,
-        callbackURL: "https://secrets-rho.vercel.app/auth/facebook/secrets"
+        callbackURL: "http://localhost:3000/auth/facebook/secrets"
     },
     function (accessToken, refreshToken, profile, cb) {
         User.findOrCreate({facebookId: profile.id}, function (err, user) {
